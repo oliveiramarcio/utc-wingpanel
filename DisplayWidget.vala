@@ -14,6 +14,9 @@ public class UTC.DisplayWidget : Gtk.Grid {
     }
 
     public void set_utc_time() {
-        utc_label.set_label(new GLib.DateTime.now_utc().format("%a, %b %d      %H:%M:%S (UTC)"));
+        GLib.DateTime utcTime = new GLib.DateTime.now_utc();
+        GLib.TimeZone bogotaTimeZone = new GLib.TimeZone("-05:00");
+        GLib.DateTime bogotaTime = utcTime.to_timezone(bogotaTimeZone);
+        utc_label.set_label(bogotaTime.format("%a, %b %d      %H:%M:%S (Bogotá)"));
     }
 }
